@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(ros_test)
+project(roscpp_tutorials)
 
 find_package(Boost REQUIRED COMPONENTS date_time thread)
 find_package(catkin REQUIRED COMPONENTS message_generation rostime roscpp rosconsole roscpp_serialization)
@@ -15,14 +15,33 @@ catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 macro(rostutorial T)
   add_executable(${T} ${T}/${T}.cpp)
   target_link_libraries(${T} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-  # add_dependencies(${T} ros_test_gencpp) uncomment this when you are adding services, actions and custom messages
+  add_dependencies(${T} roscpp_tutorials_gencpp)
   install(TARGETS ${T}
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 endmacro()
 
 foreach(dir
     listener
+    notify_connect
     talker
+    babbler
+    add_two_ints_client
+    add_two_ints_server
+    add_two_ints_server_class
+    anonymous_listener
+    listener_with_userdata
+    listener_multiple
+    listener_threaded_spin
+    listener_async_spin
+    # listener_single_message
+    listener_with_tracked_object
+    listener_unreliable
+    listener_class
+    node_handle_namespaces
+    custom_callback_processing
+    timers
+    parameters
+    cached_parameters
     )
   rostutorial(${dir})
 endforeach()
