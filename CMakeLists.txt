@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(roscpp_tutorials)
+project(ros_test)
 
 find_package(Boost REQUIRED COMPONENTS date_time thread)
 find_package(catkin REQUIRED COMPONENTS message_generation rostime roscpp rosconsole roscpp_serialization)
@@ -12,10 +12,10 @@ generate_messages(DEPENDENCIES std_msgs)
 
 catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 
-macro(rostutorial T)
+macro(ros_test T)
   add_executable(${T} ${T}/${T}.cpp)
   target_link_libraries(${T} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-  add_dependencies(${T} roscpp_tutorials_gencpp)
+  add_dependencies(${T} ros_test_gencpp)
   install(TARGETS ${T}
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 endmacro()
@@ -43,7 +43,7 @@ foreach(dir
     parameters
     cached_parameters
     )
-  rostutorial(${dir})
+  ros_test(${dir})
 endforeach()
 
 add_executable(time_api_sleep time_api/sleep/sleep.cpp)
