@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(ros_test)
 
 find_package(Boost REQUIRED COMPONENTS date_time thread)
+find_package(Eigen3 REQUIRED)
 find_package(catkin REQUIRED COMPONENTS message_generation rostime roscpp rosconsole roscpp_serialization)
 
 include_directories(${catkin_INCLUDE_DIRS})
